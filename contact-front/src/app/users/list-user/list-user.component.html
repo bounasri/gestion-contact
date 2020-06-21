@@ -1,0 +1,43 @@
+<button pButton label="New user" class="ui-button-success btnAdd"
+        icon="pi pi-plus"  routerLink="/new-user"
+*appAuthority="['ROLE_Admin']"></button>
+
+<p-table [value]="users" >
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Nom</th>
+      <th>Prénom</th>
+      <th>Email</th>
+      <th>Nom d'utilisateur</th>
+      <th>Role</th>
+      <th colspan="2"  *appAuthority="['ROLE_Admin']">Opérations </th>
+    </tr>
+
+  </ng-template>
+
+  <ng-template pTemplate="body" let-user>
+    <tr>
+      <td>{{user.nom}}</td>
+      <td>{{user.prenom}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.username}}</td>
+
+      <td>{{user.role}}</td>
+
+      <td *appAuthority="['ROLE_Admin']">
+        <button  pButton icon="pi pi-trash" (click)="supprimer(user)"
+                 class="ui-button-danger" ></button>
+
+      </td>
+      <td *appAuthority="['ROLE_Admin']">
+        <button  pButton icon="pi pi-pencil" (click)="editer(user)"
+                 class="ui-button-warning" ></button>
+
+      </td>
+    </tr>
+
+  </ng-template>
+
+</p-table>
+
+<p-confirmDialog acceptLabel="Oui" rejectLabel="Non"></p-confirmDialog>
